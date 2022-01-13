@@ -11,6 +11,7 @@ const usersRouter = require("./routes/users");
 const barcodeRouter = require("./routes/barcode");
 const dateSetRouter = require("./routes/dateSet");
 const transactionRouter = require("./routes/transaction");
+const transactionInformationRouter = require("./routes/transactionInformation");
 
 //import middleware
 const errorHandler = require("./middleware/errorHandler");
@@ -36,6 +37,8 @@ app.use("/users", usersRouter);
 app.use("/barcode", barcodeRouter);
 app.use("/dateset", dateSetRouter);
 app.use("/transaction", transactionRouter);
+app.use("/transaction_infomation", transactionInformationRouter);
+
 app.use(errorHandler);
 
 module.exports = app;

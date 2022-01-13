@@ -7,6 +7,10 @@ const schema = new mongoose.Schema(
       require: true,
       trim: true,
     },
+    buCode: {
+      type: String,
+      trim: true,
+    },
     createOn: {
       type: String,
       require: true,
