@@ -9,6 +9,7 @@ exports.index = async (req, res, next) => {
         employeeId: item.employeeId,
         buCode: item.buCode,
         datetime: format(item.createdAt, "dd-MM-yyyy HH:mm:ss"),
+        key:item.key
       };
     });
     res.status(200).json({ data: transactions });

@@ -11,6 +11,10 @@ const schema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    key: {
+      type: String,
+      trim: true,
+    },
     createOn: {
       type: String,
       require: true,

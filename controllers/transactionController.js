@@ -25,23 +25,26 @@ exports.insert = async (req, res, next) => {
     const findEmployee = await findEmployeeUse(day, employeeId);
     let messge;
     if (count >= findDate.limit) {
-      throw new Error("Fully");
+      throw new Error("โควต้าในวันนี้เต็มจำนวนแล้ว");
     }
     if (findEmployee) {
-      throw new Error("Used");
+      throw new Error("คุณได้ใช้โควต้าในวันนี้ไปแล้ว");
     }
     const chars = employeeId.split("_");
-    const [buCode, ...rest] = chars;
+    const [buCode, key] = chars;
     let newTransaction = new transaction({
       employeeId: employeeId,
       buCode: buCode,
       dateName: dateName,
       createOn: day,
+      key: key,
     });
     messge = await newTransaction.save();
-    res
-      .status(200)
-      .json({ message: "sucess", detail: messge, count: count + 1 });
+    res.status(200).json({
+      message: "บันทึกข้อมูลสำเร็จ",
+      detail: messge,
+      count: count + 1,
+    });
   } catch (error) {
     next(error);
   }
@@ -50,7 +53,7 @@ exports.insert = async (req, res, next) => {
 exports.clearData = async (req, res, next) => {
   await transaction.remove({}, function (err) {
     console.log("collection removed");
-    res.status(200).json({ data: "data" });
+    res.status(200).json({ data: "collection removed" });
   });
 };
 
