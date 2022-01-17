@@ -18,7 +18,7 @@ const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 app.use(cors());
-
+TZ = "Asia/Bangkok";
 mongoose.connect(config.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
