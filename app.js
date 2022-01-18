@@ -6,7 +6,6 @@ const logger = require("morgan");
 const config = require("./config/index");
 const cors = require("cors");
 const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -25,17 +24,10 @@ app.use(cors());
 
 app.set("trust proxy", 1);
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-});
-
-//  apply to all requests
-app.use(limiter);
-
 app.use(helmet());
 
 TZ = "Asia/Bangkok";
+
 mongoose.connect(config.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
