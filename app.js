@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const logger = require("morgan");
 const config = require("./config/index");
 const cors = require("cors");
-const helmet = require("helmet");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -20,7 +19,6 @@ const passportJWT = require("./middleware/passportJWT");
 
 const app = express();
 app.use(cors());
-app.use(helmet());
 TZ = "Asia/Bangkok";
 mongoose.connect(config.MONGODB_URI, {
   useNewUrlParser: true,
