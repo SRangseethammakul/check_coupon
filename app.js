@@ -16,6 +16,7 @@ const transactionInformationRouter = require("./routes/transactionInformation");
 
 //import middleware
 const errorHandler = require("./middleware/errorHandler");
+const passportJWT = require("./middleware/passportJWT");
 
 const app = express();
 app.use(cors());
@@ -37,9 +38,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/barcode", barcodeRouter);
-app.use("/dateset", dateSetRouter);
+app.use("/dateset", [passportJWT.isLogin], dateSetRouter);
 app.use("/transaction", transactionRouter);
-app.use("/transaction_infomation", transactionInformationRouter);
+app.use("/transaction_infomation", [passportJWT.isLogin], transactionInformationRouter);
 
 app.use(errorHandler);
 
