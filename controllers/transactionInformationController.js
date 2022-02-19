@@ -28,12 +28,10 @@ exports.countNumberPerDate = async (req, res, next) => {
     });
 
     let transactionbybus = await countPerBU();
-    transactionbybus = transactionbybus.map((item) => {
-      return {
-        name: item._id,
-        number: item.count,
-      };
-    });
+    transactionbybus = transactionbybus.map(item => ({
+      name: item._id,
+      number: item.count,
+    }));
 
     res
       .status(200)
@@ -45,12 +43,10 @@ exports.countNumberPerDate = async (req, res, next) => {
 exports.countNumberPerBU = async (req, res, next) => {
   try {
     let transactions = await countPerBU();
-    transactions = transactions.map((item) => {
-      return {
-        name: item._id,
-        number: item.count,
-      };
-    });
+    transactions = transactions.map((item) => ({
+      name: item._id,
+      number: item.count,
+    }));
     res.status(200).json({ data: transactions });
   } catch (error) {
     next(error);
@@ -66,14 +62,12 @@ exports.searchByDate = async (req, res, next) => {
         $lte: endDate,
       },
     }).sort({ _id: -1 });
-    transactions = await transactions.map((item) => {
-      return {
-        employeeId: item.employeeId,
-        buCode: item.buCode,
-        datetime: format(item.createdAt, "dd-MM-yyyy HH:mm:ss"),
-        key: item.key,
-      };
-    });
+    transactions = await transactions.map((item) => ({
+      employeeId: item.employeeId,
+      buCode: item.buCode,
+      datetime: format(item.createdAt, "dd-MM-yyyy HH:mm:ss"),
+      key: item.key,
+    }));
     res.status(200).json({ data: transactions });
   } catch (error) {
     next(error);

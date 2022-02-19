@@ -26,7 +26,7 @@ const countPerDate = () => {
         count: { $sum: 1 },
       },
     },
-    {$sort : { _id : 1 }}
+    { $sort: { _id: 1 } },
   ];
   return new Promise((resolve, reject) => {
     transaction.aggregate(aggregatorOpts, async (err, result) => {
@@ -43,7 +43,7 @@ const countPerBU = () => {
         count: { $sum: 1 },
       },
     },
-    {$sort : { _id : 1 }}
+    { $sort: { _id: 1 } },
   ];
   return new Promise((resolve, reject) => {
     transaction.aggregate(aggregatorOpts, async (err, result) => {
@@ -56,5 +56,5 @@ module.exports = {
   couteDate,
   findEmployeeUse,
   countPerDate,
-  countPerBU
+  countPerBU,
 };
