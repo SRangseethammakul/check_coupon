@@ -5,5 +5,6 @@ const transactionInformationController = require("../controllers/transactionInfo
 router.get("/", transactionInformationController.index);
 router.get("/countperdate", transactionInformationController.countNumberPerDate);
 router.get("/countperbu", transactionInformationController.countNumberPerBU);
+router.get("/searchByDate", transactionInformationController.searchByDate);
 
 module.exports = router;

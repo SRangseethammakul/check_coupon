@@ -34,9 +34,9 @@ exports.register = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     const { userName, password } = req.body;
-
     //check userName exist system
     const user = await User.findOne({ userName: userName });
+    console.log(user);
     if (!user) {
       const error = new Error("not found user");
       error.statusCode = 404;
@@ -74,13 +74,13 @@ exports.login = async (req, res, next) => {
   }
 };
 exports.profile = (req, res, next) => {
-    const {_id, name, userName, role} = req.user;
-    return res.status(200).json({
-        user : {
-            id : _id,
-            name : name,
-            userName : userName,
-            role : role
-        }
-    });
-}
+  const { _id, name, userName, role } = req.user;
+  return res.status(200).json({
+    user: {
+      id: _id,
+      name: name,
+      userName: userName,
+      role: role,
+    },
+  });
+};

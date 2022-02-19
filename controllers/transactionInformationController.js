@@ -9,7 +9,7 @@ exports.index = async (req, res, next) => {
         employeeId: item.employeeId,
         buCode: item.buCode,
         datetime: format(item.createdAt, "dd-MM-yyyy HH:mm:ss"),
-        key:item.key
+        key: item.key,
       };
     });
     res.status(200).json({ data: transactions });
@@ -49,6 +49,29 @@ exports.countNumberPerBU = async (req, res, next) => {
       return {
         name: item._id,
         number: item.count,
+      };
+    });
+    res.status(200).json({ data: transactions });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.searchByDate = async (req, res, next) => {
+  try {
+    const { startDate, endDate } = req.query;
+    let transactions = await Transaction.find({
+      createOn: {
+        $gte: startDate,
+        $lte: endDate,
+      },
+    }).sort({ _id: -1 });
+    transactions = await transactions.map((item) => {
+      return {
+        employeeId: item.employeeId,
+        buCode: item.buCode,
+        datetime: format(item.createdAt, "dd-MM-yyyy HH:mm:ss"),
+        key: item.key,
       };
     });
     res.status(200).json({ data: transactions });
